@@ -9,6 +9,7 @@ from beanie import init_beanie
 from beanie import PydanticObjectId
 from models.users import User
 from models.events import Event
+from models.location import Location
 
 import motor, motor.motor_asyncio, beanie
 
@@ -83,7 +84,7 @@ async def init_db_1():
     client = motor.motor_asyncio.AsyncIOMotorClient("mongodb://localhost:27017")
     await beanie.init_beanie(
         database=client.db_name,
-        document_models=[User, Event]
+        document_models=[User, Event, Location]
     )
         
         

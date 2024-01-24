@@ -3,6 +3,7 @@ from fastapi.responses import RedirectResponse
 
 from routes.users import user_router
 from routes.events import event_router
+from routes.location import location_router
 from database.connection import init_db_1
 
 import uvicorn
@@ -13,6 +14,7 @@ app = FastAPI()
 
 app.include_router(user_router,  prefix="/user")
 app.include_router(event_router, prefix="/event")
+app.include_router(location_router, prefix="/location")
 
 @app.on_event("startup")
 async def init_db():

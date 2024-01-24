@@ -3,6 +3,7 @@ from fastapi import APIRouter, HTTPException, status
 from database.connection import Database
 from models.users import User, UserSignIn
 from fastapi.templating import Jinja2Templates
+from typing import List
 
 # Класс Request в FastAPI дает информацию о входящем HTTP-запросе
 from fastapi import Request
@@ -52,5 +53,13 @@ async def sign_user_in(user: UserSignIn) -> dict:
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Invalid details passed."
+    )
+
+# Путь вывода всех юзеров
+@user_router.get("/get_users", response_model=List[User])
+async def get_users(request:Request) -> List[User]:
+    users = await user_database.get_all()
+    return templates.TemplateResponse(
+        request=request, name="users.html", context={"users":users}
     )
 

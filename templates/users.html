@@ -1,2 +1,17 @@
 {% extends "base.html" %}
-<p>Hi!</p>
+
+{% block content %}
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">Users in database</span>
+    </div>
+</nav>
+{% for user in users %}
+    <div class="card">
+        <div class="card-body">
+            <li>{{ user.email }}</li>
+            <li>{{ user.password }}</li>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}
